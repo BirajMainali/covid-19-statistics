@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-family: poppins, serif;
 }
 
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
 .navbar {
     background-color: rgba(137, 21, 21, 0.87);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .row {
@@ -103,6 +109,41 @@ span {
 
 .form-select {
     width: 100%;
-
-
 }
+
+.col-4 .card-header {
+    padding: 20px;
+    background-color: white;
+}
+
+.col-4 .card {
+    border-radius: 20px;
+}
+
+.col-4 .list-group {
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.col-4 .card .card-header .card-title {
+    font-size: 22px;
+}
+
+.col-4 .list-group-item {
+    padding: 15px;
+    font-size: 18px;
+}
+
+.side-summary {
+    height: 500px;
+}
+
+.border-none {
+    border: none;
+}
+
+.side-summary .list-group-item {
+    height: 200px;
+    width: 240px;
+}
+

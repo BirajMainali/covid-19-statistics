@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins, serif;
+}
+
+.navbar {
+    background-color: rgba(137, 21, 21, 0.87);
+}
+
+.row {
+    background-color: #ffffff !important;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 5px;
+
+}
+
+.container-fluid a {
+    font-size: 25px;
+
+
+}
+
+.navbar-brand {
+    margin-left: 100px;
+
+
+}
+
+.navbar-nav a {
+    font-size: 20px;
+
+}
+
+
+.navbar-nav {
+    margin-left: 900px;
+
+}
+
+.nav-link {
+    margin-left: 50px;
+
+}
+
+select {
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    font-size: 25px;
+}
+
+.form-select {
+    border-radius: 10px;
+}
+
+.card-footer {
+    background-color: white;
+}
+
+.card-footer h2 {
+    color: rgb(122, 118, 118);
+}
+
+.card-footer h6 {
+    color: black;
+
+}
+
+.card {
+    padding: 6px;
+    border-radius: 15px;
+}
+
+.card-title h4 {
+    font-size: 40px;
+}
+
+.card-title p {
+    font-size: 15px;
+    opacity: 0.5;
+}
+
+span {
+    opacity: 0.5;
+    font-size: 20px;
+}
+
+.col-3 h5 {
+    font-size: 30px;
+}
+
+.row p {
+    opacity: 0.5;
+}
+
+.form-select {
+    width: 100%;
+
+
+}

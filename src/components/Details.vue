@@ -37,7 +37,7 @@ export default {
             `https://covid-193.p.rapidapi.com/statistics?country=${this.SelectedCountry}`,
             {
               method: "GET",
-              responseType: 'json',
+              responseType: "json",
               headers: {
                 "x-rapidapi-key":
                     "1b2899e21dmsh530f29776d8ce27p121576jsne067b81e370e",
@@ -62,7 +62,7 @@ export default {
       this.CountryInfo.DeathPM = Statistics.deaths["1M_pop"];
       this.CountryInfo.TotalDeath = Statistics.deaths.total;
       /*Death*/
-      this.CountryInfo.TestPM = Statistics.tests["1M_pop"]
+      this.CountryInfo.TestPM = Statistics.tests["1M_pop"];
       this.CountryInfo.Totaltest = Statistics.tests.total;
       /*Test*/
       this.CountryInfo.Day = Statistics.tests.day;
@@ -96,7 +96,7 @@ export default {
       } else {
         await this.loadCountriesStatistics();
       }
-    }
+    },
   },
   async mounted() {
     await this.loadCountries();
@@ -105,13 +105,11 @@ export default {
 };
 </script>
 <template>
-  <div class="col-10">
+  <div class="col">
     <div class="card">
       <div class="card-header bg-white">
         <div class="card-title">
           <h4>Individual Country Details</h4>
-          <br/>
-          <p>Last updated: {{ CountryInfo.Day }}</p>
         </div>
       </div>
       <div class="card-body">
@@ -123,103 +121,156 @@ export default {
           </div>
           <div class="col-2">
             <select class="form-select" v-model="SelectedCountry">
-              <option v-for="country in countries" :key="country.name" :value="country.name">
+              <option
+                  v-for="country in countries"
+                  :key="country.name"
+                  :value="country.name"
+              >
                 {{ country.name }}
               </option>
             </select>
           </div>
         </div>
         <div class="row">
-          <div class="col-3">
-            <div class="row">
-              <span>Cases</span>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <h4 class="card-title">Cases</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col text-center">
+                    <h1 class="display-4 text-warning">
+                      {{ CountryInfo.TotalCases }}
+                    </h1>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="row">
-              <h5>{{ CountryInfo.TotalCases }}</h5>
-            </div>
-            <div class="row"></div>
           </div>
-          <div class="col-3">
-            <div class="row">
-              <span>Total Test</span>
-            </div>
-            <div class="row">
-              <h5>{{ CountryInfo.Totaltest }}</h5>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <h4 class="card-title">Total Test</h4>
+              </div>
+              <div class="card-body text-center">
+                <h1 class="display-4 text-info">
+                  {{ CountryInfo.Totaltest }}
+                </h1>
+              </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="row">
-              <span>Deaths</span>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <h4 class="card-title">Total Death</h4>
+              </div>
+              <div class="card-body text-center">
+                <h1 class="display-4 text-danger">
+                  {{ CountryInfo.TotalDeath }}
+                </h1>
+              </div>
             </div>
-            <div class="row">
-              <h5>{{ CountryInfo.TotalDeath }}</h5>
-            </div>
-            <div class="row"></div>
           </div>
         </div>
       </div>
       <div class="card-footer">
         <div class="row">
-          <div class="col-4">
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title mb-0" text-info>Active</h6>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <strong class="card-title">Active</strong>
               </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    New <span>{{ CountryInfo.New }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Active <span>{{ CountryInfo.Active }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Recovered <span>{{ CountryInfo.Recovered }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    1M Pop <span>{{ CountryInfo.DeathPM }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Total <span>{{ CountryInfo.TotalCases }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title mb-0" text-info>Test</h6>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    1M Populaion <span>{{ CountryInfo.TestPM }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    Total {{ CountryInfo.Totaltest }}
-                  </li>
-                </ul>
+              <div class="card-body px-0 pt-0">
+                <table class="table table-border table-hover mb-0">
+                  <tbody>
+                  <tr>
+                    <td>New</td>
+                    <td class="text-end">{{ CountryInfo.New }}</td>
+                  </tr>
+                  <tr>
+                    <td>Active</td>
+                    <td class="text-end">{{ CountryInfo.Active }}</td>
+                  </tr>
+                  <tr>
+                    <td>Per Million</td>
+                    <td class="text-end">{{ CountryInfo.CasesPM }}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td class="text-end">{{ CountryInfo.TotalCases }}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title mb-0" text-info>Death</h6>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <strong class="card-title">Test</strong>
               </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    New <span>{{ CountryInfo.NewDeath }}</span>
-                  </li>
-                  <li class="list-group-item">
-                    1M Pop {{ CountryInfo.DeathPM }}
-                  </li>
-                  <li class="list-group-item">
-                    Total {{ CountryInfo.TotalDeath }}
-                  </li>
-                </ul>
+              <div class="card-body px-0 pt-0">
+                <table class="table table-border table-hover mb-0">
+                  <tbody>
+                  <tr>
+                    <td>Test Per Million</td>
+                    <td class="text-end">{{ CountryInfo.TestPM }}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td class="text-end">{{ CountryInfo.Totaltest }}</td>
+                  </tr>
+                  <tr>
+                    <td>Recovered</td>
+                    <td class="text-end">{{ CountryInfo.Recovered }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card p-0 mb-3">
+              <div
+                  class="card-header"
+                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
+              >
+                <strong class="card-title">Death</strong>
+              </div>
+              <div class="card-body px-0 pt-0">
+                <table class="table table-border table-hover mb-0">
+                  <tbody>
+                  <tr>
+                    <td>New</td>
+                    <td class="text-end">{{ CountryInfo.NewDeath }}</td>
+                  </tr>
+                  <tr>
+                    <td>Per Million</td>
+                    <td class="text-end">{{ CountryInfo.DeathPM }}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td class="text-end">{{ CountryInfo.TotalDeath }}</td>
+                  </tr>
+
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-* {
+
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: poppins, serif;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
+    font-family: poppins, serif;
 }
 
 .navbar {
@@ -144,6 +155,15 @@ span {
 
 .side-summary .list-group-item {
     height: 200px;
-    width: 240px;
+    width: 100%;
 }
 
+
+.table-border{
+    border: 1px solid #e6e6e6;
+}
+
+.table-border>tbody>tr>td,
+.table-border>tr>td{
+
+}

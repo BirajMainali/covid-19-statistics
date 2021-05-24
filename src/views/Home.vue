@@ -9,7 +9,7 @@
 
 <script>
 import SideBarSummary from "../components/SideBarSummary";
-import Details from "../components/Details";
+import Details from "../views/Details";
 
 export default {
   name: 'Home',

@@ -1,7 +1,6 @@
 <script>
-// @ts-nocheck
-
 import axios from "axios";
+import TotalCard from "../components/TotalCard";
 
 function GetInitialCountryInfo() {
   return {
@@ -23,6 +22,9 @@ function GetInitialCountryInfo() {
 
 export default {
   name: "Details",
+  components: {
+    TotalCard,
+  },
   data() {
     return {
       SelectedCountry: "NEPAL",
@@ -133,53 +135,13 @@ export default {
         </div>
         <div class="row">
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <h4 class="card-title">Cases</h4>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col text-center">
-                    <h1 class="display-4 text-warning">
-                      {{ CountryInfo.TotalCases }}
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TotalCard title="Cases" info="display-4 text-warning" :count="CountryInfo.TotalCases"/>
           </div>
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <h4 class="card-title">Total Test</h4>
-              </div>
-              <div class="card-body text-center">
-                <h1 class="display-4 text-info">
-                  {{ CountryInfo.Totaltest }}
-                </h1>
-              </div>
-            </div>
+            <TotalCard title="Test" info="display-4 text-success" :count="CountryInfo.Totaltest"/>
           </div>
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <h4 class="card-title">Total Death</h4>
-              </div>
-              <div class="card-body text-center">
-                <h1 class="display-4 text-danger">
-                  {{ CountryInfo.TotalDeath }}
-                </h1>
-              </div>
-            </div>
+            <TotalCard title="Death" info="display-4 text-danger" :count="CountryInfo.TotalDeath"/>
           </div>
         </div>
       </div>
@@ -268,7 +230,6 @@ export default {
                     <td>Total</td>
                     <td class="text-end">{{ CountryInfo.TotalDeath }}</td>
                   </tr>
-
                   </tbody>
                 </table>
               </div>

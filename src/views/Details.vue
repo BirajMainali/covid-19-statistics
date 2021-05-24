@@ -72,7 +72,7 @@ export default {
   watch: {
     async SelectedCountry() {
       if (!this.SelectedCountry) {
-        this.CountryInfo = GetInitialCountryInfo();
+        this.CountryInfo = this.SelectedCountry="Nepal";
       } else {
         await this.loadCountriesStatistics();
       }

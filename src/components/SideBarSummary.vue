@@ -52,38 +52,38 @@ export default {
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">New Confirmed</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.NewConfirmed
-            }}</span>
+                DailyReportTotals.NewConfirmed
+              }}</span>
           </li>
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">Total Confirmed</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.TotalConfirmed
-            }}</span>
+                DailyReportTotals.TotalConfirmed
+              }}</span>
           </li>
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">New Deaths</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.NewDeaths
-            }}</span>
+                DailyReportTotals.NewDeaths
+              }}</span>
           </li>
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">Total Deaths</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.TotalDeaths
-            }}</span>
+                DailyReportTotals.TotalDeaths
+              }}</span>
           </li>
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">New Recovered</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.NewRecovered
-            }}</span>
+                DailyReportTotals.NewRecovered
+              }}</span>
           </li>
           <li class="list-group-item mt-3">
             <h5 class="text-dark p-0 m-0">Total Recovered</h5>
             <span class="badge bg-success">{{
-              DailyReportTotals.TotalRecovered
-            }}</span>
+                DailyReportTotals.TotalRecovered
+              }}</span>
           </li>
         </ul>
       </div>

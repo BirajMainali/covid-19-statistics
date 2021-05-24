@@ -1,35 +1,25 @@
 <script>
 import axios from "axios";
 import TotalCard from "../components/TotalCard";
-
-function GetInitialCountryInfo() {
-  return {
-    Population: "0",
-    New: "0",
-    Active: "0",
-    Critical: "0",
-    Recovered: "0",
-    CasesPM: "0",
-    TotalCases: "0",
-    NewDeath: "0",
-    DeathPM: "0",
-    TotalDeath: "0",
-    TestPM: "0",
-    Totaltest: "0",
-    Day: "0",
-  };
-}
+import CasesInfo from "../components/CasesInfo";
+import TestInfo from "../components/TestInfo";
+import DeathsInfo from "../components/DeathsInfo";
 
 export default {
   name: "Details",
   components: {
     TotalCard,
+    CasesInfo,
+    TestInfo,
+    DeathsInfo
   },
   data() {
     return {
-      SelectedCountry: "NEPAL",
+      SelectedCountry: null,
       countries: [],
-      CountryInfo: GetInitialCountryInfo(),
+      CasesInfo: {},
+      testsInfo: {},
+      DeathsInfo: {}
     };
   },
   methods: {
@@ -52,22 +42,10 @@ export default {
       }
     },
     renderCountriesStatistics(Statistics) {
-      this.CountryInfo.Population = Statistics.population;
-      this.CountryInfo.New = Statistics.cases.new;
-      this.CountryInfo.Active = Statistics.cases.active;
-      this.CountryInfo.Critical = Statistics.cases.critical;
-      this.CountryInfo.Recovered = Statistics.cases.recovered;
-      this.CountryInfo.CasesPM = Statistics.cases["1M_pop"];
-      this.CountryInfo.TotalCases = Statistics.cases.total;
-      /*Cases*/
-      this.CountryInfo.NewDeath = Statistics.deaths.new;
-      this.CountryInfo.DeathPM = Statistics.deaths["1M_pop"];
-      this.CountryInfo.TotalDeath = Statistics.deaths.total;
-      /*Death*/
-      this.CountryInfo.TestPM = Statistics.tests["1M_pop"];
-      this.CountryInfo.Totaltest = Statistics.tests.total;
-      /*Test*/
-      this.CountryInfo.Day = Statistics.tests.day;
+
+      this.CasesInfo = Statistics.cases;
+      this.testsInfo = Statistics.tests;
+      this.DeathsInfo = Statistics.deaths;
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();
@@ -100,6 +78,11 @@ export default {
       }
     },
   },
+  computed: {
+    getDefaultCountry() {
+      return this.SelectedCountry == null ? this.SelectedCountry : 'Nepal'
+    }
+  },
   async mounted() {
     await this.loadCountries();
     await this.loadCountriesStatistics();
@@ -122,118 +105,38 @@ export default {
             </selected>
           </div>
           <div class="col-2">
-            <select class="form-select" v-model="SelectedCountry">
+            <select v-model="SelectedCountry" class="form-select">
               <option
                   v-for="country in countries"
                   :key="country.name"
-                  :value="country.name"
-              >
-                {{ country.name }}
+                  :value="country.name">
+                {{ getDefaultCountry }}
               </option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <TotalCard title="Cases" info="display-4 text-warning" :count="CountryInfo.TotalCases"/>
+            <TotalCard :count="CasesInfo.total" info="display-4 text-warning" title="Cases"/>
           </div>
           <div class="col">
-            <TotalCard title="Test" info="display-4 text-success" :count="CountryInfo.Totaltest"/>
+            <TotalCard :count="testsInfo.total" info="display-4 text-success" title="Test"/>
           </div>
           <div class="col">
-            <TotalCard title="Death" info="display-4 text-danger" :count="CountryInfo.TotalDeath"/>
+            <TotalCard :count="DeathsInfo.total" info="display-4 text-danger" title="Death"/>
           </div>
         </div>
       </div>
       <div class="card-footer">
         <div class="row">
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <strong class="card-title">Active</strong>
-              </div>
-              <div class="card-body px-0 pt-0">
-                <table class="table table-border table-hover mb-0">
-                  <tbody>
-                  <tr>
-                    <td>New</td>
-                    <td class="text-end">{{ CountryInfo.New }}</td>
-                  </tr>
-                  <tr>
-                    <td>Active</td>
-                    <td class="text-end">{{ CountryInfo.Active }}</td>
-                  </tr>
-                  <tr>
-                    <td>Per Million</td>
-                    <td class="text-end">{{ CountryInfo.CasesPM }}</td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td class="text-end">{{ CountryInfo.TotalCases }}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <CasesInfo :cases-info="CasesInfo" title="Active"/>
           </div>
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <strong class="card-title">Test</strong>
-              </div>
-              <div class="card-body px-0 pt-0">
-                <table class="table table-border table-hover mb-0">
-                  <tbody>
-                  <tr>
-                    <td>Test Per Million</td>
-                    <td class="text-end">{{ CountryInfo.TestPM }}</td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td class="text-end">{{ CountryInfo.Totaltest }}</td>
-                  </tr>
-                  <tr>
-                    <td>Recovered</td>
-                    <td class="text-end">{{ CountryInfo.Recovered }}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <TestInfo :test-info="testsInfo" title="Test"/>
           </div>
           <div class="col">
-            <div class="card p-0 mb-3">
-              <div
-                  class="card-header"
-                  style="background-color: #f2f2f2;border-radius:15px 15px 0 0;"
-              >
-                <strong class="card-title">Death</strong>
-              </div>
-              <div class="card-body px-0 pt-0">
-                <table class="table table-border table-hover mb-0">
-                  <tbody>
-                  <tr>
-                    <td>New</td>
-                    <td class="text-end">{{ CountryInfo.NewDeath }}</td>
-                  </tr>
-                  <tr>
-                    <td>Per Million</td>
-                    <td class="text-end">{{ CountryInfo.DeathPM }}</td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td class="text-end">{{ CountryInfo.TotalDeath }}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <DeathsInfo :death-info="DeathsInfo" title="Death"/>
           </div>
         </div>
       </div>

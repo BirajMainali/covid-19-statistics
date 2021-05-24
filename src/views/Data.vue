@@ -63,18 +63,6 @@ export default {
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>{{1}}</td>
-      <td>{{ Statistics[209].country }}</td>
-      <td>{{ Statistics[209].cases.total }}</td>
-      <td>{{ Statistics[209].deaths.new }}</td>
-      <td>{{ Statistics[209].cases.recovered }}</td>
-      <td>{{ Statistics[209].cases.active }}</td>
-      <td>{{ Statistics[209].cases.critical }}</td>
-      <td>{{ Statistics[209].deaths["1M_pop"] }}</td>
-      <td>{{ Statistics[209].tests["1M_pop"] }}</td>
-      <td>{{ Statistics[209].population }}</td>
-    </tr>
     <tr v-for="(statistic, idx) in Statistics">
       <td>{{ idx + 2 }}</td>
       <td>{{ statistic.country }}</td>

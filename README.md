@@ -1,8 +1,5 @@
 # covid-data
 
-live on https://zealous-mestorf-ab3c23.netlify.app/#/
-![image](https://user-images.githubusercontent.com/71131016/119270619-4ef9cf80-bc1d-11eb-8534-6ecfe1084197.png)
-
 ## Project setup
 
 ```

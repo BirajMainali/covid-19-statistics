@@ -13,15 +13,14 @@ export default {
     TestInfo,
     DeathsInfo
   },
-  data() {
-    return {
-      SelectedCountry: null,
-      countries: [],
-      CasesInfo: {},
-      testsInfo: {},
-      DeathsInfo: {}
-    };
-  },
+
+  data: () => ({
+    SelectedCountry: null,
+    countries: [],
+    CasesInfo: {},
+    testsInfo: {},
+    DeathsInfo: {}
+  }),
   methods: {
     async getCountriesStatistics() {
       try {
@@ -72,7 +71,7 @@ export default {
   watch: {
     async SelectedCountry() {
       if (!this.SelectedCountry) {
-        this.CountryInfo = this.SelectedCountry="Nepal";
+        this.CountryInfo = this.SelectedCountry = "Nepal";
       } else {
         await this.loadCountriesStatistics();
       }

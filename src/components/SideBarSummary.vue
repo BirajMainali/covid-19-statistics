@@ -1,20 +1,15 @@
 <script>
 import axios from "axios";
+import WordWideSummary from "./WordWideSummary";
 
 export default {
   name: "SideBarSummary",
-  data() {
-    return {
-      DailyReportTotals: {
-        NewConfirmed: "",
-        TotalConfirmed: "",
-        NewDeaths: "",
-        TotalDeaths: "",
-        NewRecovered: "",
-        TotalRecovered: "",
-      },
-    };
+  components: {
+    WordWideSummary
   },
+  data: () => ({
+    DailyReportTotals: {}
+  }),
   methods: {
     async getDailyReportTotals() {
       try {
@@ -23,13 +18,8 @@ export default {
         console.log(e);
       }
     },
-    renderDailyReportTotals(data) {
-      this.DailyReportTotals.NewConfirmed = data.NewConfirmed;
-      this.DailyReportTotals.TotalConfirmed = data.TotalConfirmed;
-      this.DailyReportTotals.NewDeaths = data.NewDeaths;
-      this.DailyReportTotals.TotalDeaths = data.TotalDeaths;
-      this.DailyReportTotals.NewRecovered = data.NewRecovered;
-      this.DailyReportTotals.TotalRecovered = data.TotalRecovered;
+    renderDailyReportTotals(infos) {
+      this.DailyReportTotals = infos
     },
     async loadDailyReportTotals() {
       const res = await this.getDailyReportTotals();
@@ -49,42 +39,12 @@ export default {
       </div>
       <div class="card-body px-0">
         <ul class="list-group list-group-flush text-start side-summary">
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">New Confirmed</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.NewConfirmed
-              }}</span>
-          </li>
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">Total Confirmed</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.TotalConfirmed
-              }}</span>
-          </li>
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">New Deaths</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.NewDeaths
-              }}</span>
-          </li>
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">Total Deaths</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.TotalDeaths
-              }}</span>
-          </li>
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">New Recovered</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.NewRecovered
-              }}</span>
-          </li>
-          <li class="list-group-item mt-3">
-            <h5 class="text-dark p-0 m-0">Total Recovered</h5>
-            <span class="badge bg-success">{{
-                DailyReportTotals.TotalRecovered
-              }}</span>
-          </li>
+          <WordWideSummary title="New Confirmed" :count="DailyReportTotals.NewConfirmed"/>
+          <WordWideSummary title="Total Confirmed" :count="DailyReportTotals.TotalConfirmed"/>
+          <WordWideSummary title="New Death's" :count="DailyReportTotals.NewDeaths"/>
+          <WordWideSummary title="Total Death's" :count="DailyReportTotals.TotalDeaths"/>
+          <WordWideSummary title="New Recovered" :count="DailyReportTotals.NewRecovered"/>
+          <WordWideSummary title="Total Recovered" :count="DailyReportTotals.TotalRecovered"/>
         </ul>
       </div>
     </div>

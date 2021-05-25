@@ -8,27 +8,23 @@
         <tbody>
         <tr>
           <td>New</td>
-          <td class="text-end">{{ CasesInfo.new }}</td>
+          <td class="text-end">{{ casesInfo.new }}</td>
         </tr>
         <tr>
           <td>Active</td>
-          <td class="text-end">{{ CasesInfo.active }}</td>
+          <td class="text-end">{{ casesInfo.active }}</td>
         </tr>
         <tr>
-          <td>Active</td>
-          <td class="text-end">{{ CasesInfo.critical }}</td>
-        </tr>
-        <tr>
-          <td>Per Million</td>
-          <td class="text-end">{{ CasesInfo.recovered }}</td>
+          <td>Recovered</td>
+          <td class="text-end">{{ casesInfo.recovered }}</td>
         </tr>
         <tr>
           <td>Per Million</td>
-          <td class="text-end">{{ CasesInfo["1M_pop"] }}</td>
+          <td class="text-end">{{ casesInfo["1M_pop"] }}</td>
         </tr>
         <tr>
-          <td>Per Million</td>
-          <td class="text-end">{{ CasesInfo.total }}</td>
+          <td>Total</td>
+          <td class="text-end">{{ casesInfo.total }}</td>
         </tr>
         </tbody>
       </table>
@@ -41,7 +37,7 @@ export default {
   name: "SummaryTable",
   props: {
     title: String,
-    CasesInfo: Object
+    casesInfo: Object
   }
 };
 </script>

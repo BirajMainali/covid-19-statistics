@@ -8,15 +8,15 @@
         <tbody>
         <tr>
           <td>New</td>
-          <td class="text-end">{{ DeathInfo.new }}</td>
+          <td class="text-end">{{ deathInfo.new }}</td>
         </tr>
         <tr>
           <td>Per Million</td>
-          <td class="text-end">{{ DeathInfo["1M_pop"] }}</td>
+          <td class="text-end">{{ deathInfo["1M_pop"] }}</td>
         </tr>
         <tr>
           <td>Total</td>
-          <td class="text-end">{{ DeathInfo.total }}</td>
+          <td class="text-end">{{ deathInfo.total }}</td>
         </tr>
         </tbody>
       </table>
@@ -29,7 +29,7 @@ export default {
   name: "DeathsInfo",
   props: {
     title: String,
-    DeathInfo: Object
+    deathInfo: Object
   }
 }
 </script>

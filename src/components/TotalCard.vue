@@ -20,7 +20,7 @@ export default {
   name: "TotalCard",
   props: {
     title: String,
-    count: Number,
+    count: String,
     info: String,
   },
 };

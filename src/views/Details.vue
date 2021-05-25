@@ -4,6 +4,11 @@ import TotalCard from "../components/TotalCard";
 import CasesInfo from "../components/CasesInfo";
 import TestInfo from "../components/TestInfo";
 import DeathsInfo from "../components/DeathsInfo";
+import AxiosConfiguration from "../AxiosConfiguration";
+
+const getInitialCountry = () => {
+  this.SelectedCountry = 'Nepal'
+}
 
 export default {
   name: "Details",
@@ -15,27 +20,17 @@ export default {
   },
 
   data: () => ({
-    SelectedCountry: null,
+    SelectedCountry: 'Nepal',
     countries: [],
     CasesInfo: {},
     testsInfo: {},
     DeathsInfo: {}
   }),
+
   methods: {
     async getCountriesStatistics() {
       try {
-        return await axios(
-            `https://covid-193.p.rapidapi.com/statistics?country=${this.SelectedCountry}`,
-            {
-              method: "GET",
-              responseType: "json",
-              headers: {
-                "x-rapidapi-key":
-                    "1b2899e21dmsh530f29776d8ce27p121576jsne067b81e370e",
-                "x-rapidapi-host": "covid-193.p.rapidapi.com",
-              },
-            }
-        );
+        return AxiosConfiguration.get(`?country=${this.SelectedCountry}`);
       } catch (e) {
         console.warn(e);
       }
@@ -48,6 +43,7 @@ export default {
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();
+      console.log(res);
       return this.renderCountriesStatistics(res.data.response[0]);
     },
 
@@ -71,16 +67,11 @@ export default {
   watch: {
     async SelectedCountry() {
       if (!this.SelectedCountry) {
-        this.CountryInfo = this.SelectedCountry = "Nepal";
+        this.CountryInfo = getInitialCountry();
       } else {
         await this.loadCountriesStatistics();
       }
     },
-  },
-  computed: {
-    getDefaultCountry() {
-      return this.SelectedCountry == null ? this.SelectedCountry : 'Nepal'
-    }
   },
   async mounted() {
     await this.loadCountries();
@@ -105,11 +96,12 @@ export default {
           </div>
           <div class="col-2">
             <select v-model="SelectedCountry" class="form-select">
+              <option value="">Select</option>
               <option
                   v-for="country in countries"
                   :key="country.name"
                   :value="country.name">
-                {{ getDefaultCountry }}
+                {{ country.name }}
               </option>
             </select>
           </div>

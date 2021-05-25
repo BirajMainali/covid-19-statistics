@@ -7,10 +7,6 @@
       <table class="table table-border table-hover mb-0">
         <tbody>
         <tr>
-          <td>Day</td>
-          <td class="text-end">{{ testInfo.day }}</td>
-        </tr>
-        <tr>
           <td>Test Per Million</td>
           <td class="text-end">{{ testInfo["1M_pop"] }}</td>
         </tr>

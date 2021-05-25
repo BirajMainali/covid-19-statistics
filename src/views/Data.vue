@@ -1,28 +1,18 @@
 <script>
-import axios from "axios";
+import AxiosConfiguration from "../AxiosConfiguration";
 
 export default {
   name: "Data",
   data() {
     return {
       Statistics: [],
+      all: {},
     }
   },
   methods: {
     async getCountriesStatistics() {
       try {
-        return await axios(
-            `https://covid-193.p.rapidapi.com/statistics`,
-            {
-              method: "GET",
-              responseType: "json",
-              headers: {
-                "x-rapidapi-key":
-                    "1b2899e21dmsh530f29776d8ce27p121576jsne067b81e370e",
-                "x-rapidapi-host": "covid-193.p.rapidapi.com",
-              },
-            }
-        );
+        return await AxiosConfiguration.get();
       } catch (e) {
         console.warn(e);
       }
@@ -31,15 +21,17 @@ export default {
       for (let statistic in Statistics) {
         this.Statistics.push({...Statistics[statistic]});
       }
+      this.all = Statistics[217];
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();
-      console.log(res.data.response);
       return this.renderCountriesStatistics(res.data.response);
     }
   },
   async mounted() {
-    await this.loadCountriesStatistics();
+    setTimeout(() => {
+      this.loadCountriesStatistics()
+    }, 1000)
   }
 }
 
@@ -47,7 +39,7 @@ export default {
 
 
 <template>
-  <table class="table table-hover table-bordered table-hover">
+  <table class="table table-hover table-bordered table-hover dataTable">
     <thead>
     <tr class="my-header">
       <td>#</td>
@@ -64,7 +56,7 @@ export default {
     </thead>
     <tbody>
     <tr v-for="(statistic, idx) in Statistics">
-      <td>{{ idx + 2 }}</td>
+      <td>{{ idx + 1 }}</td>
       <td>{{ statistic.country }}</td>
       <td>{{ statistic.cases.total }}</td>
       <td>{{ statistic.deaths.new }}</td>
@@ -81,5 +73,4 @@ export default {
 
 
 <style scoped>
-
 </style>

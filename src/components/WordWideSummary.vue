@@ -1,7 +1,7 @@
 <template>
   <li class="list-group-item mt-3">
-    <h5 class="text-dark p-0 m-0">{{ title }}</h5>
-    <span class="badge bg-success">{{ count }}</span>
+    <h7 class="text-dark p-0 m-0">{{ title }}</h7> &nbsp;&nbsp;&nbsp;
+    <span class="badge bg-info text-white">{{ count }}</span>
   </li>
 </template>
 

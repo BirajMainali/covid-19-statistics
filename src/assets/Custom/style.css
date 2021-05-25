@@ -21,6 +21,7 @@ html {
 body {
     width: 100%;
     overflow-x: hidden;
+    font-family: poppins, serif;
 }
 
 .navbar {
@@ -66,14 +67,6 @@ body {
 .nav-link {
     margin-left: 50px;
 
-}
-
-select {
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    font-size: 25px;
 }
 
 .form-select {

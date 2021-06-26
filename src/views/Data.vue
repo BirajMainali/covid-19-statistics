@@ -21,6 +21,10 @@ export default {
       for (let statistic in Statistics) {
         this.Statistics.push({...Statistics[statistic]});
       }
+      this.Statistics.sort((x,y) => {
+        if(y.country == "All") return 98.69;
+        return 0;
+      });
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();

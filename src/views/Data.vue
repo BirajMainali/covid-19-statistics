@@ -21,7 +21,6 @@ export default {
       for (let statistic in Statistics) {
         this.Statistics.push({...Statistics[statistic]});
       }
-      this.all = Statistics[217];
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();
@@ -29,9 +28,7 @@ export default {
     }
   },
   async mounted() {
-    setTimeout(() => {
-      this.loadCountriesStatistics()
-    }, 1000)
+    await this.loadCountriesStatistics()
   }
 }
 

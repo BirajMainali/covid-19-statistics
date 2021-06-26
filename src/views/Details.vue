@@ -20,6 +20,7 @@ export default {
   },
 
   data: () => ({
+    Loading: true,
     SelectedCountry: 'Nepal',
     countries: [],
     CasesInfo: {},
@@ -35,7 +36,7 @@ export default {
         console.warn(e);
       }
     },
-    renderCountriesStatistics(Statistics) {
+    appendCountriesStatistics(Statistics) {
 
       this.CasesInfo = Statistics.cases;
       this.testsInfo = Statistics.tests;
@@ -43,8 +44,8 @@ export default {
     },
     async loadCountriesStatistics() {
       const res = await this.getCountriesStatistics();
-      console.log(res);
-      return this.renderCountriesStatistics(res.data.response[0]);
+      this.appendCountriesStatistics(res.data.response[0]);
+      this.Loading = false;
     },
 
     async getCountries() {
@@ -81,54 +82,60 @@ export default {
 </script>
 <template>
   <div class="col">
-    <div class="card">
+    <div class="card py-0">
       <div class="card-header bg-white">
         <div class="card-title">
           <h4>Individual Country Details</h4>
         </div>
       </div>
-      <div class="card-body">
-        <div class="row mb-4">
-          <div class="col-2">
-            <selected class="form-select">
-              Details
-            </selected>
+      <div v-if="!Loading">
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-2">
+              <selected class="form-select">
+                Details
+              </selected>
+            </div>
+            <div class="col-2">
+              <select v-model="SelectedCountry" class="form-select">
+                <option value="">Select</option>
+                <option
+                    v-for="country in countries"
+                    :key="country.name"
+                    :value="country.name">
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
           </div>
-          <div class="col-2">
-            <select v-model="SelectedCountry" class="form-select">
-              <option value="">Select</option>
-              <option
-                  v-for="country in countries"
-                  :key="country.name"
-                  :value="country.name">
-                {{ country.name }}
-              </option>
-            </select>
+          <div class="row">
+            <div class="col">
+              <TotalCard :count="CasesInfo.total" info="display-4 text-warning" title="Cases"/>
+            </div>
+            <div class="col">
+              <TotalCard :count="testsInfo.total" info="display-4 text-success" title="Test"/>
+            </div>
+            <div class="col">
+              <TotalCard :count="DeathsInfo.total" info="display-4 text-danger" title="Death"/>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <TotalCard :count="CasesInfo.total" info="display-4 text-warning" title="Cases"/>
-          </div>
-          <div class="col">
-            <TotalCard :count="testsInfo.total" info="display-4 text-success" title="Test"/>
-          </div>
-          <div class="col">
-            <TotalCard :count="DeathsInfo.total" info="display-4 text-danger" title="Death"/>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col">
+              <CasesInfo :cases-info="CasesInfo" title="Active"/>
+            </div>
+            <div class="col">
+              <TestInfo :test-info="testsInfo" title="Test"/>
+            </div>
+            <div class="col">
+              <DeathsInfo :death-info="DeathsInfo" title="Death"/>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col">
-            <CasesInfo :cases-info="CasesInfo" title="Active"/>
-          </div>
-          <div class="col">
-            <TestInfo :test-info="testsInfo" title="Test"/>
-          </div>
-          <div class="col">
-            <DeathsInfo :death-info="DeathsInfo" title="Death"/>
-          </div>
+      <div class="d-flex justify-content-center mt-5 mb-4" v-else>
+        <div class="spinner-border" role="status">
         </div>
       </div>
     </div>
